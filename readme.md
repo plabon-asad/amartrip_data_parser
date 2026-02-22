@@ -8,4 +8,4 @@
 - Config venv: `python3 -m venv myvenv`
 - Activate venv: `source myvenv/bin/activate`
 - Install required package `pip3 install pymongo certifi`
-- 
+- Run Your Script: `python main_script.py`
