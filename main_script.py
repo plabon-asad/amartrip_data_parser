@@ -4,10 +4,11 @@ from datetime import datetime
 from pymongo import MongoClient
 from bson import ObjectId
 
-CSV_FILE = "dhaka_metropolitan_v1_0_0.csv"
+CSV_FILE = "v6_01_03_26.csv"
 FAILED_CSV = "failed_rows.csv"
 # Insert data in Dhaka Metropolitan 67b5e4fee721e241d18d94a6
 PARENT_ID = ObjectId('67b5e4fee721e241d18d94a6')
+VERSION = "4.4.10"
 
 client = MongoClient(
     "mongodb+srv://volume00009:71KqRv3yiKAPdMBV@amartripcluster.yph09.mongodb.net/",
@@ -124,7 +125,7 @@ def process_csv():
             "area": row.get("Area", ""),
             "postCode": row.get("Post Code", ""),
             "subName": row.get("subName", ""),
-            "version": "4.4.8",
+            "version": VERSION,
             "createdAt": now,
             "updatedAt": now,
         }
