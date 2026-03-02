@@ -25,73 +25,13 @@ After running:
 - Review `failed_rows`
 - Fix errors if needed and re-run
 
+## ⚠️ Critical ObservationsCase Sensitivity:
 
-## Promt for AI
-I am working on a ride-based location management system.
+ 1. **Case Sensitivity**: Notice that `Longitude` and `Latitude` start with **Uppercase**, while `name` and `subName` start with **lowercase**. Your CSV headers must match these exactly.
+ 
+ 2. **Mandatory Fields**: If `Longitude` or `Latitude` are missing or empty in a row, the script will skip that row and log it to `failed_rows.csv`.
+ 
+ 3. **Special Logic (Bangla)**: If the `name` column contains Bangla characters, the script adds a tiny offset ($1 \times 10^{-17}$) to the coordinates.
+ 
+ 4. **Static Fields**: Some fields are hardcoded in the script and do not need to be in your CSV
 
-Project Stack:
-- Backend: NestJS
-- Database: MongoDB Atlas
-- Collection: test.backup_locations
-- Search: MongoDB Atlas Search (index name: autocomplete_index)
-- Geo queries: 2dsphere index on long_lat
-- Data import: Python CSV to MongoDB bulk insert script
-
-System Architecture:
-
-1) Data Import Flow
-- CSV file contains: name, Longitude, Latitude, AreaType, Address, etc.
-- Python script validates coordinates
-- Converts lat/long to float
-- Assigns parent ObjectId
-- Sets type (union)
-- Adds timestamps
-- Bulk inserts into MongoDB Atlas
-- Logs failed rows
-
-2) MongoDB Structure
-Each document contains:
-{
-  name,
-  type (district | upazila | union),
-  long_lat: [longitude, latitude],
-  parent: ObjectId,
-  landmark: boolean,
-  areaType,
-  address,
-  version,
-  createdAt,
-  updatedAt
-}
-
-Indexes:
-- 2dsphere index on long_lat
-- Atlas Search index: autocomplete_index
-- normal indexes on name and sorting fields
-
-3) API Endpoints
-- GET /location
-- GET /location/location-near-me
-- GET /location/popular-location
-- GET /location/search
-- POST /location/missing-location
-
-4) Search Behavior
-- Uses $search (Atlas Search)
-- Fuzzy search on name, district, upazila
-- Boosts popular locations
-- Boosts exact name matches
-- Boosts nearby results if lat/lng provided
-- Expands hierarchy:
-   - If district matched → return upazilas
-   - If upazila matched → return unions
-
-5) Geo Query
-- Uses $near with 2dsphere index
-- Max distance: 10km
-
-6) Missing Location
-- Users can submit missing locations
-- Stored with PENDING status
-
-Now I want help with:
