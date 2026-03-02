@@ -7,8 +7,12 @@
 - Install virtual environment module: `sudo apt install python3.12-venv`
 - Create venv: `python3 -m venv myvenv`
 - Activate venv: `source myvenv/bin/activate`
-- Install required package `pip install pymongo certifi`
-- Run Your Script: `python main_script.py`
+- Install required package `pip install pymongo certifi python-dotenv`
+
+> 📁 Create a `.env` file (or see `.env.sample`) containing at least the `MONGO_URI` value. The script reads optional
+> variables like `CSV_FILE`, `FAILED_CSV`, `PARENT_ID`, and `VERSION` from environment as well.
+
+- Run Your Script: `python main.py`
 
 ## 📋 Data Import Requirements
 
