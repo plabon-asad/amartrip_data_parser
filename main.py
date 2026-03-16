@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # configuration from environment (with sensible defaults)
-CSV_FILE = os.getenv("CSV_FILE", "v6_01_03_26.csv")
+CSV_FILE = os.getenv("CSV_FILE", "v5.0.1.csv")
 FAILED_CSV = os.getenv("FAILED_CSV", "failed_rows.csv")
 
 # connection information
@@ -21,7 +21,7 @@ if not MONGO_URI:
 # Insert data in Dhaka Metropolitan (example default value)
 parent_id_str = os.getenv("PARENT_ID", "67b5e4fee721e241d18d94a6")
 PARENT_ID = ObjectId(parent_id_str)
-VERSION = os.getenv("VERSION", "4.4.10")
+VERSION = os.getenv("VERSION", "5.0.1")
 
 client = MongoClient(
     MONGO_URI,

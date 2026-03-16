@@ -39,3 +39,9 @@ After running:
  
  4. **Static Fields**: Some fields are hardcoded in the script and do not need to be in your CSV
 
+ ### Production data import start
+
+ Date: 16/03/2026, 2.57PM
+ Version: `5.0.1` - `5.0.3`
+ FileName: `v5.0.1`
+
